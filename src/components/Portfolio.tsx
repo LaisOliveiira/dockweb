@@ -1,5 +1,6 @@
 
-import { ArrowUpRight, Scissors, UtensilsCrossed } from "lucide-react";
+import Image from "next/image";
+import { ArrowUpRight } from "lucide-react";
 
 const projects = [
   {
@@ -8,23 +9,17 @@ const projects = [
     category: "Site para negócio local",
     description:
       "Uma experiência digital para apresentar serviços, preços e facilitar agendamentos.",
-    icon: Scissors,
-    theme: "barber",
-    label: "BARBER STUDIO",
-    headline: "Seu estilo começa aqui.",
-    tag: "BARBEARIA / CONCEPT",
+    image: "/projects/barbearia.jpg",
+    alt: "Demonstração de site para barbearia",
   },
   {
     number: "02",
-    title: "Restaurante Concept",
+    title: "Casa Oliva",
     category: "Site institucional",
     description:
       "Uma vitrine digital para apresentar o cardápio, o ambiente e os canais de reserva.",
-    icon: UtensilsCrossed,
-    theme: "restaurant",
-    label: "SABOR & ESSÊNCIA",
-    headline: "Uma experiência para saborear.",
-    tag: "RESTAURANTE / CONCEPT",
+    image: "/projects/restaurante.jpg",
+    alt: "Demonstração de site para restaurante brasileiro Casa Oliva",
   },
 ];
 
@@ -52,69 +47,41 @@ export default function Portfolio() {
         </div>
 
         <div className="portfolio-grid">
-          {projects.map((project) => {
-            const Icon = project.icon;
+          {projects.map((project) => (
+            <article
+              className="project-card"
+              key={project.number}
+            >
+              <div className="project-preview">
+                <Image
+                  src={project.image}
+                  alt={project.alt}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="project-preview-image"
+                />
+              </div>
 
-            return (
-              <article className="project-card" key={project.number}>
-                <div className={`project-preview ${project.theme}`}>
-                  <div className="project-browser">
-                    <div className="browser-dots">
-                      <i />
-                      <i />
-                      <i />
-                    </div>
-                    <span>DOCKWEB / CONCEPT {project.number}</span>
-                  </div>
-
-                  <div className="project-website">
-                    <div className="project-website-nav">
-                      <span>{project.label}</span>
-                      <span>INÍCIO　 SERVIÇOS　 CONTATO</span>
-                    </div>
-
-                    <div className="project-website-content">
-                      <div className="project-website-copy">
-                        <span className="project-kicker">
-                          {project.tag}
-                        </span>
-
-                        <h3>{project.headline}</h3>
-
-                        <span className="project-fake-button">
-                          EXPLORAR
-                        </span>
-                      </div>
-
-                      <div className="project-visual">
-                        <Icon size={65} strokeWidth={1} />
-                      </div>
-                    </div>
-                  </div>
-
-                  <span className="project-concept-badge">
-                    PROJETO CONCEITUAL
+              <div className="project-info">
+                <div>
+                  <span className="project-category">
+                    {project.category}
                   </span>
+
+                  <h3>{project.title}</h3>
+
+                  <p>{project.description}</p>
                 </div>
 
-                <div className="project-info">
-                  <div>
-                    <span className="project-category">
-                      {project.category}
-                    </span>
-
-                    <h3>{project.title}</h3>
-
-                    <p>{project.description}</p>
-                  </div>
-
-                  <span className="project-arrow" aria-hidden="true">
-                    <ArrowUpRight size={21} />
-                  </span>
-                </div>
-              </article>
-            );
-          })}
+                <span
+                  className="project-arrow"
+                  aria-hidden="true"
+                >
+                  <ArrowUpRight size={21} />
+                </span>
+              </div>
+            </article>
+          ))}
         </div>
 
         <p className="portfolio-disclaimer">
